@@ -1,3 +1,3 @@
 [submodule "scs"]
 	path = scs_source
-	url = https://github.com/cvxgrp/scs.git
+	url = https://github.com/SURI-Shared/scs.git
