@@ -121,6 +121,41 @@ py.extension_module(
     dependencies: blas_deps,
 )
 
+lapacke_dep = cc.find_library('lapacke',required : false)
+
+py.extension_module(
+    '_scs_tridir',
+
+    'scs/scspy.c',
+    'scs_source/linsys/cpu/symmetric_tridiagonal/private.c',
+
+    # scs_source/src:
+    'scs_source/src/aa.c',
+    'scs_source/src/cones.c',
+    'scs_source/src/ctrlc.c',
+    'scs_source/src/exp_cone.c',
+    'scs_source/src/linalg.c',
+    'scs_source/src/normalize.c',
+    'scs_source/src/rw.c',
+    'scs_source/src/scs_version.c',
+    'scs_source/src/scs.c',
+    'scs_source/src/util.c',
+
+    # scs_source/linsys:
+    'scs_source/linsys/scs_matrix.c',
+    'scs_source/linsys/csparse.c',
+
+    include_directories : [
+        'scs',
+        'scs_source/include',
+        'scs_source/linsys',
+        'scs_source/linsys/cpu/symmetric_tridiagonal',
+        incdir_numpy],
+    install: true,
+    c_args: c_args + ['-DPYTHON', '-DCTRLC=1', '-DUSE_LAPACK=1', '-DDLONG=1', '-DUSE_LAPACKE=1', '-DPY_TRIDIR=1','-DTRIDIR=1'],
+    dependencies: blas_deps+lapacke_dep,
+)
+
 py.extension_module(
     '_scs_indirect',
 

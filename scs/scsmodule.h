@@ -49,6 +49,8 @@ static PyObject *moduleinit(void) {
   m = Py_InitModule("_scs_gpu", scs_module_methods);
 #elif defined PY_MKL
   m = Py_InitModule("_scs_mkl", scs_module_methods);
+#elif defined PY_TRIDIR
+  m = Py_InitModule("_scs_tridir", scs_module_methods);
 #else
   m = Py_InitModule("_scs_direct", scs_module_methods);
 #endif
@@ -79,6 +81,8 @@ PyInit__scs_indirect(void)
 PyInit__scs_gpu(void)
 #elif defined PY_MKL
 PyInit__scs_mkl(void)
+#elif defined PY_TRIDIR
+PyInit__scs_tridir(void)
 #else
 PyInit__scs_direct(void)
 #endif
@@ -94,6 +98,8 @@ init_scs_indirect(void)
 init_scs_gpu(void)
 #elif defined PY_MKL
 init_scs_mkl(void)
+#elif defined PY_TRIDIR
+init_scs_tridir(void)
 #else
 init_scs_direct(void)
 #endif

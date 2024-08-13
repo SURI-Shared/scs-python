@@ -26,6 +26,9 @@ SOLVED_INACCURATE = 2  # SCS best guess solved
 
 # Choose which SCS to import based on settings.
 def _select_scs_module(stgs):
+    if stgs.pop("symmetric_tridiagonal", False):
+        import _scs_tridir
+        return _scs_tridir
     if stgs.pop("gpu", False):  # False by default
         if not stgs.pop("use_indirect", _USE_INDIRECT_DEFAULT):
             raise NotImplementedError(
