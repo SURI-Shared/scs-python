@@ -655,18 +655,18 @@ static PyObject *SCS_solve(SCS *self, PyObject *args) {
 #ifdef DLONG
 #ifdef SFLOAT
   char *outarg_string = "{s:l,s:l,s:l,s:f,s:f,s:f,s:f,s:f,s:f,s:f,s:f,s:f,s:f,"
-                        "s:f,s:f,s:f,s:f,s:f,s:l,s:l,s:s}";
+                        "s:f,s:f,s:f,s:f,s:f,s:l,s:l,s:s,s:f}";
 #else
   char *outarg_string = "{s:l,s:l,s:l,s:d,s:d,s:d,s:d,s:d,s:d,s:d,s:d,s:d,s:d,"
-                        "s:d,s:d,s:d,s:d,s:d,s:l,s:l,s:s}";
+                        "s:d,s:d,s:d,s:d,s:d,s:l,s:l,s:s,s:d}";
 #endif
 #else
 #ifdef SFLOAT
   char *outarg_string = "{s:i,s:i,s:i,s:f,s:f,s:f,s:f,s:f,s:f,s:f,s:f,s:f,s:f,"
-                        "s:f,s:f,s:f,s:f,s:f,s:i,s:i,s:s}";
+                        "s:f,s:f,s:f,s:f,s:f,s:i,s:i,s:s,s:f}";
 #else
   char *outarg_string = "{s:i,s:i,s:i,s:f,s:d,s:d,s:d,s:d,s:d,s:d,s:d,s:d,s:d,"
-                        "s:d,s:d,s:d,s:d,s:d,s:i,s:i,s:s}";
+                        "s:d,s:d,s:d,s:d,s:d,s:i,s:i,s:s,s:d}";
 #endif
 #endif
 
@@ -694,7 +694,7 @@ static PyObject *SCS_solve(SCS *self, PyObject *args) {
       "accel_time", (scs_float)(info.accel_time),
       "rejected_accel_steps", (scs_int)info.rejected_accel_steps,
       "accepted_accel_steps", (scs_int)info.accepted_accel_steps,
-      "status", info.status);
+      "status", info.status,"init_lin_sys_time", (scs_float)(info.init_lin_sys_time));
   /* clang-format on */
 
   return_dict = Py_BuildValue("{s:O,s:O,s:O,s:O}", "x", x, "y", y, "s", s,
